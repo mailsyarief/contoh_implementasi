@@ -1,0 +1,34 @@
+version: "3.1" #versi docker compose
+services: #mendifinisikan service yang akan digunakan
+
+    mariadb: #definisi service
+      container_name: c-db #nama container
+      restart: always #aturan restart
+      image: mariadb:latest #mama image
+      ports:
+        - "3306:3306" #port yang dituju
+      volumes: 
+        - ./mysql:/var/lib/mysql #volume yang digunakan
+      environment:
+        - MYSQL_DATABASE=laravel #definisi database
+        - MYSQL_ROOT_PASSWORD=root #definisi password user root
+
+    pma: #definisi service
+      container_name: c-pma #nama container
+      restart: always #aturan restart
+      image: phpmyadmin/phpmyadmin:latest #nama image
+      ports: 
+        - "8080:80" #port yang dituju
+      environment: 
+        - PMA_HOST=mariadb #host dimana phpmyadmin akan terhubung
+
+    app: #definisi service
+      container_name: c-app #nama container
+      build: code #direktori Dockerfile yang akan dibuild
+      restart: always #aturan restart
+      ports:
+        - "80:80" #port yang dituju
+      volumes:
+        - ./code:/var/www/html #volume yang digunakan
+
+        
