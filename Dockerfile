@@ -35,6 +35,9 @@ COPY /code/docker/apache /etc/apache2/sites-available
 #   Merubah owner
 RUN chown -R www-data:www-data /var/www/html
 
+#   Installasi Composer
+RUN composer install
+
 #   Mengenable mod_rewrite di apache
 RUN a2enmod rewrite
 
