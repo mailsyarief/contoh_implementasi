@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    You are logged in Edited!
+                    You are logged in Edited Awok Awok!
                 </div>
             </div>
         </div>
